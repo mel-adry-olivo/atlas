@@ -14,7 +14,9 @@ export default function Products({ children }) {
   );
 }
 
-export function ProductItem({ index, book }) {
+export function ProductItem({ index, book, warehouses }) {
+  const warehouse = warehouses.find((warehouse) => warehouse.id === book.warehouse_id);
+
   return (
     <li className="py-1">
       <div className="p-4 border-b flex">
@@ -30,7 +32,7 @@ export function ProductItem({ index, book }) {
           <p>Stock: {book.stock_quantity}</p>
         </div>
         <div className="flex flex-col pr-4 mr-4 border-r flex-1">
-          <p>{book.warehouse}</p>
+          <p>Warehouse: {warehouse?.name}</p>
           <p>{book.rack}</p>
         </div>
         <div className="flex flex-col pr-4 mr-4 border-r flex-1">

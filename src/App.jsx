@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import Sidebar, { SidebarProvider, SidebarContext, SidebarItem } from './components/Sidebar';
 import { ShoppingBasket, Warehouse, LayoutDashboard } from 'lucide-react';
-import Login from './components/Login';
+import Sidebar, { SidebarProvider, SidebarContext, SidebarItem } from './components/Sidebar';
 import Products, { ProductItem } from './components/Products';
+import Warehouses, { WarehouseItem } from './components/Warehouses';
+import Login from './components/Login';
 import books from './data/Books';
+import warehouses from './data/Warehouses';
 
 const DashboardContent = () => <div>Dashboard Content</div>;
-const WarehouseContent = () => <div>Warehouse Content</div>;
 
 function MainContent({ activeItem }) {
   const renderContent = () => {
@@ -17,12 +18,18 @@ function MainContent({ activeItem }) {
         return (
           <Products>
             {books.map((book, index) => (
-              <ProductItem key={index} index={index + 1} book={book} />
+              <ProductItem key={index} index={index + 1} book={book} warehouses={warehouses} />
             ))}
           </Products>
         );
       case 'Warehouse':
-        return <WarehouseContent />;
+        return (
+          <Warehouses>
+            {warehouses.map((warehouse, index) => (
+              <WarehouseItem key={warehouse.id} index={index + 1} warehouse={warehouse} />
+            ))}
+          </Warehouses>
+        );
       default:
         return <div>Select an item from the sidebar</div>;
     }
